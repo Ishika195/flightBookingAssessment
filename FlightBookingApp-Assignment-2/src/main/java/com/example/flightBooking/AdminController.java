@@ -12,7 +12,7 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	@PostMapping("/airline/register")
-	String registerAirline(@RequestBody Airline airline) {
+	String registerAirline(@RequestBody String airline) {
 		System.out.println(airline);
 		return "Successfully Booked Airline";
 	}

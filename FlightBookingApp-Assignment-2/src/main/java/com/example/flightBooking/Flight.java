@@ -14,9 +14,9 @@ public class Flight {
 	private Integer flightId;
 	
 	private String flightName;
-	private Airline airline;
-	private City fromPlace;
-	private City designation;
+	private String airline;
+	private String fromPlace;
+	private String designation;
 	private Date takeOffTime;
 	private Date landingTime;
 	private int businessSeats;
@@ -36,22 +36,22 @@ public class Flight {
 	public void setFlightName(String flightName) {
 		this.flightName = flightName;
 	}
-	public Airline getAirline() {
+	public String getAirline() {
 		return airline;
 	}
-	public void setAirline(Airline airline) {
+	public void setAirline(String airline) {
 		this.airline = airline;
 	}
-	public City getFromPlace() {
+	public String getFromPlace() {
 		return fromPlace;
 	}
-	public void setFromPlace(City fromPlace) {
+	public void setFromPlace(String fromPlace) {
 		this.fromPlace = fromPlace;
 	}
-	public City getDesignation() {
+	public String getDesignation() {
 		return designation;
 	}
-	public void setDesignation(City designation) {
+	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
 	public Date getTakeOffTime() {

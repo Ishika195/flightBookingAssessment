@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 	@Autowired
-	FlightRepository repository;
+	FlightRepository flightrepository;
 	@Autowired
 	TicketRepository ticketRepository;
 	
 	List<Flight> searchFlight(Flight flight) {
-		return repository.findByFromPlaceOrDesignationOrTakeOffTimeOrLandingTime(flight.getFromPlace(), flight.getDesignation(), flight.getTakeOffTime(), flight.getLandingTime());
+		return flightrepository.findByFlightId(flight.getFlightId());
 	}
 	
 	Ticket getTicket(int pnr) {
