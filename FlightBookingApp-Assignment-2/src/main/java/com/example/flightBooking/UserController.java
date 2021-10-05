@@ -20,12 +20,12 @@ public class UserController {
 	UserService userService;
 	@PostMapping("/booking/{flightId}")
 	String bookingFlight(@PathVariable int flightId,@RequestBody Ticket ticket ) {
-		userService.addTicket(ticket,flightId);
-		return "Successfully Booked";
+		return userService.addTicket(ticket,flightId);
+		//return "Successfully Booked";
 	}
 	
 	@PostMapping("/search")
-	List<Flight> searchFlight(@RequestBody Flight flight) {
+	Flight searchFlight(@RequestBody Flight flight) {
 		return userService.searchFlight(flight);
 	}
 	
@@ -34,13 +34,15 @@ public class UserController {
 		return userService.getTicket(pnr);
 	}
 	
-	@GetMapping("/booking/history/{emailId")
-		String getPreviousTickets(@PathVariable int emailId) {
-		return "previous booked tickets";
+	@GetMapping("/booking/history/{emailId}")
+		List<Ticket> getPreviousTickets(@PathVariable String emailId) {
+		
+		return userService.getHistory(emailId);
 	}
 	
 	@DeleteMapping("/booking/cancel/{pnr}")
 		String cancelTicket(@PathVariable int pnr) {
+			userService.deleteTicket(pnr);
 			return "ticket with pnr = "+pnr+ " cancelled";
 		}
 }

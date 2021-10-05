@@ -1,9 +1,11 @@
 package com.example.flightBooking;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -11,22 +13,31 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
+
+	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("/airline/register")
-	String registerAirline(@RequestBody String airline) {
-		System.out.println(airline);
-		return "Successfully Booked Airline";
+	String registerAirline(@RequestBody Airline airline) {
+		adminService.addAirline(airline);
+		return "Successfully added Airline";
 	}
-	
+
+	@ResponseStatus(code = HttpStatus.CREATED)
+	@PostMapping("/admin/add")
+	String addAdmin(@RequestBody Admin admin) {
+		adminService.saveAdmin(admin);
+		return "Admin details saved";
+	}
+
 	@PostMapping("/admin/login")
-	String adminLogin(@RequestBody AdminLogin details) {
-		System.out.print(details);
-		return "Successfully Logged In";
+	Admin adminLogin(@RequestBody Admin adminDetails) {
+		return adminService.login(adminDetails);
 	}
-	
+
+	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("/airline/inventory/add")
 	String addInventory(@RequestBody Flight flight) {
-		adminService.addFlight(flight);
-		return "Successfully added";
+		return adminService.addFlight(flight);
+		//return "Flight added successfully";
 	}
-	
+
 }

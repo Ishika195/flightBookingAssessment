@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Flight {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	private Integer flightId;
+	Integer flightId;
 	
 	private String flightName;
 	private String airline;
