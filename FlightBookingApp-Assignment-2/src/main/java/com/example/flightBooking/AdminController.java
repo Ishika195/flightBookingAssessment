@@ -13,12 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
+	boolean isadmin = false;
 
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("/airline/register")
 	String registerAirline(@RequestBody Airline airline) {
-		adminService.addAirline(airline);
-		return "Successfully added Airline";
+		if(isadmin) {
+			adminService.addAirline(airline);
+			return "Successfully added Airline";
+		}
+		else {
+			return "login as admin to add new airline";
+		}
 	}
 
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -30,14 +36,17 @@ public class AdminController {
 
 	@PostMapping("/admin/login")
 	Admin adminLogin(@RequestBody Admin adminDetails) {
+		isadmin = true;
 		return adminService.login(adminDetails);
 	}
 
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@PostMapping("/airline/inventory/add")
 	String addInventory(@RequestBody Flight flight) {
+		if(isadmin)
 		return adminService.addFlight(flight);
-		//return "Flight added successfully";
+		else return "login as admin to add new flights or schedule flights";
+		// return "Flight added successfully";
 	}
 
 }
